@@ -9,13 +9,22 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          "Explore",
-          style: TextStyle(
-            color: Color(0xFF001637),
-            fontSize: 30,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Text(
+              "Explore",
+              style: TextStyle(
+                color: Color(0xFF001637),
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              '.',
+              style: TextStyle(color: Colors.red, fontSize: 50),
+            )
+          ],
         ),
         actions: [
           IconButton(
@@ -57,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
