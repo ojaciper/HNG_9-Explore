@@ -1,7 +1,10 @@
+import 'package:explore/models/country_model.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  DetailsScreen({super.key, required this.index});
+
+  CountryModel index;
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +14,9 @@ class DetailsScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFE5E5E5),
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          "Andorra",
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          index.nameCommon,
+          style: const TextStyle(color: Colors.black),
         ),
       ),
       body: Padding(
@@ -23,13 +26,14 @@ class DetailsScreen extends StatelessWidget {
             Container(
               height: 250,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.red,
               ),
             ),
+            const SizedBox(height: 10),
             Row(
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Population: ",
                   style: TextStyle(
                     color: Color(0xFF1C1917),
@@ -38,7 +42,70 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Population ",
+                  index.population.toString(),
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: [
+                const Text(
+                  "Region:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  index.region,
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: [
+                const Text(
+                  "Capital:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  index.capital,
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: const [
+                Text(
+                  "Motto:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  "No motto",
                   style: TextStyle(
                     color: Color(0xFF1C1917),
                     fontWeight: FontWeight.w300,
@@ -47,10 +114,11 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
             Row(
-              children: const [
-                Text(
-                  "Region:",
+              children: [
+                const Text(
+                  "Official Language:  ",
                   style: TextStyle(
                     color: Color(0xFF1C1917),
                     fontWeight: FontWeight.w500,
@@ -58,13 +126,140 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Europe ",
+                  index.languages.toString(),
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: [
+                const Text(
+                  "Ethic Group:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                for (var i = 0; i < index.ethnicGroup.length; i++)
+                  Text(
+                    "${index.ethnicGroup[i]},   ",
+                    style: const TextStyle(
+                      color: Color(0xFF1C1917),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                    ),
+                  )
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: const [
+                Text(
+                  "Religion:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  "Not Found",
                   style: TextStyle(
                     color: Color(0xFF1C1917),
                     fontWeight: FontWeight.w300,
                     fontSize: 16,
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: const [
+                Text(
+                  "Government:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  "Not Found",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Text(
+                  "Independent:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  index.independent.toString().toUpperCase(),
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: [
+                const Text(
+                  "Area:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  index.area.toString(),
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text(
+                  "Currency:  ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                for (var i = 0; i < index.currency.length; i++)
+                  Text(
+                    "${index.currency[i]}",
+                    style: const TextStyle(
+                      color: Color(0xFF1C1917),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                    ),
+                  )
               ],
             ),
           ],

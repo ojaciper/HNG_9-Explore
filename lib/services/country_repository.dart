@@ -20,4 +20,17 @@ class CountryRespository {
       throw Exception("Faild to load countries");
     }
   }
+
+  Future<void> getnote() async {
+    var list = [];
+    final response = await http.get(Uri.parse(baseUrl));
+    if (response.statusCode == 200) {
+      var jsonList = jsonDecode(response.body) as List;
+      for (var element in jsonList) {
+        element['currencies'] != null
+            ? print(element['currencies'].keys[0])
+            : print("Not Fine");
+      }
+    }
+  }
 }

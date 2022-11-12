@@ -18,7 +18,7 @@ class Country extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 50,
               width: 50,
               child: ClipRRect(

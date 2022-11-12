@@ -1,4 +1,5 @@
 import 'package:explore/models/country_model.dart';
+import 'package:explore/screens/detail_screen.dart';
 import 'package:explore/services/country_repository.dart';
 import 'package:explore/widgets/country.dart';
 import 'package:flutter/material.dart';
@@ -95,12 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: const Color(0xFFA9B8D4),
                           ),
                           borderRadius: BorderRadius.circular(5)),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.wordpress_outlined),
-                          SizedBox(width: 5),
-                          Text("EN"),
-                        ],
+                      child: InkWell(
+                        onTap: (() {
+                          countryRespository.getnote();
+                        }),
+                        child: Row(
+                          children: const [
+                            Icon(Icons.wordpress_outlined),
+                            SizedBox(width: 5),
+                            Text("EN"),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -140,7 +146,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   var snapshotName = snapshot.data![index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Country(index: snapshotName),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                              index: snapshotName,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Country(index: snapshotName),
+                    ),
                   );
                 }),
               );
