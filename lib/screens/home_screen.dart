@@ -1,7 +1,17 @@
+import 'package:explore/models/country_model.dart';
+import 'package:explore/services/country_repository.dart';
+import 'package:explore/widgets/country.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  CountryRespository countryRespository = CountryRespository();
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +20,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text(
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            const Text(
               "Explore",
               style: TextStyle(
                 color: Color(0xFF001637),
@@ -20,9 +30,14 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              '.',
-              style: TextStyle(color: Colors.red, fontSize: 50),
+            const SizedBox(width: 5),
+            Container(
+              height: 5,
+              width: 5,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFF6C00),
+                borderRadius: BorderRadius.circular(30),
+              ),
             )
           ],
         ),
@@ -111,6 +126,27 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15).copyWith(top: 15),
+        child: FutureBuilder(
+          future: countryRespository.getCountry(),
+          builder: ((context, AsyncSnapshot<List<CountryModel>> snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: ((context, index) {
+                  var snapshotName = snapshot.data![index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Country(index: snapshotName),
+                  );
+                }),
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
         ),
       ),
     );
