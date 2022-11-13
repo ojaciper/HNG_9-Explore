@@ -22,15 +22,19 @@ class CountryRespository {
   }
 
   Future<void> getnote() async {
-    var list = [];
+    Map<String, dynamic> listMap = {};
     final response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       var jsonList = jsonDecode(response.body) as List;
       for (var element in jsonList) {
-        element['currencies'] != null
-            ? print(element['currencies'].keys[0])
-            : print("Not Fine");
+        listMap.addAll(element['flags'].values);
+        // listMap.addAll(element['coatOfArms']['png'][0]);
+        print(listMap);
       }
     }
   }
 }
+
+    // element['idd']['root'] != null
+    //         ? print((element['idd']['suffixes'][0]))
+    //         : print("Not Fine");

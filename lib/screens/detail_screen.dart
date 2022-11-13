@@ -23,11 +23,14 @@ class DetailsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20),
         child: ListView(
           children: [
-            Container(
+            SizedBox(
               height: 250,
-              decoration: BoxDecoration(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.red,
+                child: Image.network(
+                  index.imgUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -253,13 +256,68 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 for (var i = 0; i < index.currency.length; i++)
                   Text(
-                    "${index.currency[i]}",
+                    "${index.currency[i]} ",
                     style: const TextStyle(
                       color: Color(0xFF1C1917),
                       fontWeight: FontWeight.w300,
                       fontSize: 16,
                     ),
                   )
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: const [
+                Text(
+                  "GDP: ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Text(
+                  "Time zone: ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  index.timezone[0].toString(),
+                  style: const TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 2),
+            Row(
+              children: const [
+                Text(
+                  "Date format: ",
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  'dd/mm/yyyy',
+                  style: TextStyle(
+                    color: Color(0xFF1C1917),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16,
+                  ),
+                )
               ],
             ),
           ],

@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:explore/models/country_model.dart';
 
 class Country extends StatelessWidget {
-  Country({
+  const Country({
     Key? key,
     required this.index,
   }) : super(key: key);
@@ -23,10 +22,15 @@ class Country extends StatelessWidget {
               width: 50,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.network(
-                  index.imgUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: index.imgUrl != null
+                    ? Image.network(
+                        index.imgUrl,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        "assets/no-image.png",
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             const SizedBox(width: 10),

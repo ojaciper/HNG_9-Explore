@@ -10,6 +10,7 @@ class CountryModel {
   final ethnicGroup;
   final double area;
   final currency;
+  final List<String> timezone;
 
   CountryModel({
     required this.nameCommon,
@@ -23,6 +24,7 @@ class CountryModel {
     required this.ethnicGroup,
     required this.area,
     required this.currency,
+    required this.timezone,
   });
 
   factory CountryModel.fromMap(Map<String, dynamic> map) {
@@ -47,6 +49,7 @@ class CountryModel {
       area: map['area'] ?? 0.0,
       currency:
           map['currencies'] != null ? map['currencies'].keys.toList() : "",
+      timezone: List<String>.from(map['timezones']),
     );
   }
 }

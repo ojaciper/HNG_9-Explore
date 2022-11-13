@@ -1,3 +1,4 @@
+import 'package:explore/constants/constants.dart';
 import 'package:explore/models/country_model.dart';
 import 'package:explore/screens/detail_screen.dart';
 import 'package:explore/services/country_repository.dart';
@@ -16,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -97,12 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           borderRadius: BorderRadius.circular(5)),
                       child: InkWell(
-                        onTap: (() {
-                          countryRespository.getnote();
-                        }),
+                        onTap: () =>
+                            choosenLanguage(context, size.height * 0.8),
                         child: Row(
                           children: const [
-                            Icon(Icons.wordpress_outlined),
+                            Icon(Icons.language_outlined),
                             SizedBox(width: 5),
                             Text("EN"),
                           ],
