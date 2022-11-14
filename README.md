@@ -47,7 +47,7 @@ challenges and unsolved issues
 | -------------------------------------------------------------------------------------------------------------------    | 
 | <img src="assets/images/dark-img1.jpg" width=40%>   &emsp;            <img src="assets/images/dark-img2.jpg" width=40%>| 
 |                                                                                                                        |
-|                                       Light mode                                                                                 |
+|                                       Light mode                                                                       |
 |<img src="assets/images/light-img1.jpg" width=40%>  &emsp;           <img src="assets/images/light-img1.jpg" width=40%> | 
 |                                                                                                                        |
 |                                                                                                                        
