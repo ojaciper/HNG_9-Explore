@@ -1,16 +1,56 @@
-# explore
+# List Of Country
 
-A new Flutter project.
+This app is made for easy access to details of all the country in the world, <br>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Feature
+1. api integration
+2. scrollable listview
+3. Image slider
+3. light and dark mod
 
-A few resources to get you started if this is your first Flutter project:
+## List of liberies
+1. Google Fonts<br>
+    This package is use to get aweasome font.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. smoot page indicator<br>
+    This package enable us to a dotted indicator when sliding the image,
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. intl<br>
+    Provides internationalization and localization facilities
+
+4. provider<br>
+    This package enable us to manage our theme state
+
+5. Shared Preference<br>
+    This package was use, to help us store the theme data, whenever we set the theme, the hive store the current theme, so that when we close our app and open it again we will still have our current theme.
+
+## Feature i will like to add
+1. Authentication system
+2. Map view ability
+
+
+challenges and unsolved issues
+1. Filter
+2. Langueges
+3. Search
+
+
+<!-- - [x] Appetize.io -  https://appetize.io/app/hdzx4jbiskvquf5sx4bej4qslq?device=pixel4&osVersion=12.0&scale=75
+- [x] APK File  -    https://drive.google.com/file/d/1kdXXowniivUS864_aO5FD6erRZpUVNqM/view?usp=share_link -->
+
+
+## Screenshot
+
+<!-- |                                   Dark mode                                                                            | 
+| -------------------------------------------------------------------------------------------------------------------    | 
+| <img src="assets/images/dark-img1.jpg" width=40%>   &emsp;            <img src="assets/images/dark-img2.jpg" width=40%>| 
+| <img src="assets/images/dark-img3.jpg" width=40%>  &emsp;             <img src="assets/images/dark-img4.jpg" width=40%>| 
+|                                                                                                                        |
+|                                                                                                                        |
+|                 Light Mode                                                                                             |   
+|                                                                                                                        |
+| <img src="assets/images/light-img1.jpg" width=40%>  &emsp;           <img src="assets/images/light-img2.jpg" width=40%>| 
+| <img src="assets/images/light-img3.jpg" width=40%>  &emsp;           <img src="assets/images/light-img4.jpg" width=40%>| 
+|                                                                                                                        |    
+|                                                                                                                        | -->

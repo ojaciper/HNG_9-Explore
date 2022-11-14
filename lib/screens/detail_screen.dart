@@ -1,13 +1,17 @@
-import 'package:explore/models/country_model.dart';
+import 'package:explore/models/countries_list.dart';
+import 'package:explore/widgets/image_card.dart';
+import 'package:explore/widgets/text_info.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailsScreen extends StatelessWidget {
   DetailsScreen({super.key, required this.index});
 
-  CountryModel index;
+  CountriesList index;
 
   @override
   Widget build(BuildContext context) {
+    var formatter = NumberFormat('#,###,000');
     return Scaffold(
       backgroundColor: const Color(0xFFE5E5E5),
       appBar: AppBar(
@@ -15,7 +19,7 @@ class DetailsScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          index.nameCommon,
+          index.name!.common!,
           style: const TextStyle(color: Colors.black),
         ),
       ),
@@ -23,302 +27,118 @@ class DetailsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20),
         child: ListView(
           children: [
-            SizedBox(
-              height: 250,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  index.imgUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            ImageCard(index: index),
             const SizedBox(height: 10),
-            Row(
-              children: [
-                const Text(
-                  "Population: ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.population.toString(),
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Population:   ",
+              value: index.population,
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: [
-                const Text(
-                  "Region:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.region,
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Region:   ",
+              value: index.region,
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: [
-                const Text(
-                  "Capital:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.capital,
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Row(
-              children: const [
-                Text(
-                  "Motto:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  "No motto",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Capital:   ",
+              value: (index.capital!.isNotEmpty
+                  ? index.capital![0]
+                  : "No Capital"),
+              formatter: formatter,
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                const Text(
-                  "Official Language:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.languages.toString(),
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Official Language:   ",
+              value: index.languages!
+                  .getLanguages()
+                  .where((element) => element != null)
+                  .firstWhere((element) => (element == element),
+                      orElse: () => "English")
+                  .toString(),
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: [
-                const Text(
-                  "Ethic Group:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                for (var i = 0; i < index.ethnicGroup.length; i++)
-                  Text(
-                    "${index.ethnicGroup[i]},   ",
-                    style: const TextStyle(
-                      color: Color(0xFF1C1917),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16,
-                    ),
-                  )
-              ],
+            TextInfo(
+              title: "Sub Region:   ",
+              value: index.subregion,
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: const [
-                Text(
-                  "Religion:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  "Not Found",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Row(
-              children: const [
-                Text(
-                  "Government:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  "Not Found",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Continent:   ",
+              value: index.continents!.first,
+              formatter: formatter,
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                const Text(
-                  "Independent:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.independent.toString().toUpperCase(),
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "Independent:   ",
+              value: index.independent! ? "YES" : "NO",
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: [
-                const Text(
-                  "Area:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.area.toString(),
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                const Text(
-                  "Currency:  ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                for (var i = 0; i < index.currency.length; i++)
-                  Text(
-                    "${index.currency[i]} ",
-                    style: const TextStyle(
-                      color: Color(0xFF1C1917),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16,
-                    ),
-                  )
-              ],
+            TextInfo(
+              title: "Area:   ",
+              value: "${index.area!.toString()} km2",
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: const [
-                Text(
-                  "GDP: ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+            TextInfo(
+              title: "UN-Member:   ",
+              value: index.unMember! ? "YES" : "NO",
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "Currency:   ",
+              value: (index.currencies!.bBD != null
+                      ? index.currencies!.bBD!.symbol
+                      : " No Currency")
+                  .toString(),
+              formatter: formatter,
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                const Text(
-                  "Time zone: ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  index.timezone[0].toString(),
-                  style: const TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                )
-              ],
+            TextInfo(
+              title: "Time Zone:   ",
+              value: index.timezones!.first.toString(),
+              formatter: formatter,
             ),
             const SizedBox(height: 2),
-            Row(
-              children: const [
-                Text(
-                  "Date format: ",
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  'dd/mm/yyyy',
-                  style: TextStyle(
-                    color: Color(0xFF1C1917),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16,
-                  ),
-                )
-              ],
+            TextInfo(
+              title: "Date Format:   ",
+              value: "dd/mm/yyyy",
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "Driving Side:   ",
+              value: index.car!.side!.toUpperCase(),
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "First Day of the Week:   ",
+              value: index.startOfWeek,
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "Latitude:   ",
+              value: index.latlng!.first.toString(),
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "Longitude:   ",
+              value: index.latlng!.last.toString(),
+              formatter: formatter,
+            ),
+            const SizedBox(height: 2),
+            TextInfo(
+              title: "Official Assigned:   ",
+              value: index.status,
+              formatter: formatter,
             ),
           ],
         ),
