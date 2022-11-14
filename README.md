@@ -36,8 +36,9 @@ challenges and unsolved issues
 3. Search
 
 
-<!-- - [x] Appetize.io -  https://appetize.io/app/hdzx4jbiskvquf5sx4bej4qslq?device=pixel4&osVersion=12.0&scale=75
-- [x] APK File  -    https://drive.google.com/file/d/1kdXXowniivUS864_aO5FD6erRZpUVNqM/view?usp=share_link -->
+- [x] Appetize.io -  https://appetize.io/app/lv3nazb5kirveouk6qwmfsaqa4?device=pixel6&osVersion=12.0&scale=75
+ [x] Apk link        https://drive.google.com/file/d/1MdyXh_K_wGbs3xiTxY_D-bbmyd93tZlT/view?usp=sharing
+
 
 
 ## Screenshot
