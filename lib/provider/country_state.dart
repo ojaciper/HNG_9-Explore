@@ -9,6 +9,7 @@ class CountriesState with ChangeNotifier {
 
   Future<List<CountriesList>> fetchList() async {
     _countriesList = await CountryRespository().getCountries();
+    _countriesList.sort(((a, b) => a.name!.common!.compareTo(b.name!.common!)));
 
     notifyListeners();
 

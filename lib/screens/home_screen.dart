@@ -1,9 +1,8 @@
 import 'package:explore/constants/constants.dart';
 import 'package:explore/models/countries_list.dart';
-import 'package:explore/models/country_model.dart';
 import 'package:explore/provider/country_state.dart';
+import 'package:explore/provider/dark_theme_provider.dart';
 import 'package:explore/screens/detail_screen.dart';
-import 'package:explore/services/country_repository.dart';
 import 'package:explore/widgets/country.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<CountriesList>? countriesList;
-  CountryRespository countryRespository = CountryRespository();
 
   @override
   void initState() {
@@ -39,17 +37,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    bool isDarkActive = context.read<DarkThemeProvider>().darkTheme;
+
     return Scaffold(
+        backgroundColor: isDarkActive ? Colors.white : const Color(0xFF000F24),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor:
+              isDarkActive ? Colors.white : const Color(0xFF000F24),
           elevation: 0,
           title: Row(
             // crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
+              Text(
                 "Explore",
                 style: TextStyle(
-                  color: Color(0xFF001637),
+                  color: isDarkActive
+                      ? Constants.primaryTextColor
+                      : Constants.secondaryTextColor,
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
                 ),
@@ -67,11 +71,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.light_mode,
-                  color: Color(0xFF1C1917),
-                )),
+              onPressed: () {
+                isDarkActive = !isDarkActive;
+                context.read<DarkThemeProvider>().darkTheme = isDarkActive;
+              },
+              icon: isDarkActive
+                  ? Icon(
+                      Icons.nightlight_round_sharp,
+                      color: isDarkActive
+                          ? Constants.primaryIconColor
+                          : Constants.secondaryIconColor,
+                      size: 30,
+                    )
+                  : Icon(
+                      Icons.wb_sunny_outlined,
+                      color: isDarkActive
+                          ? Constants.primaryIconColor
+                          : Constants.secondaryIconColor,
+                      size: 30,
+                    ),
+            ),
             const SizedBox(width: 10)
           ],
           toolbarHeight: 150,
@@ -84,20 +103,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF2F4F7),
                       borderRadius: BorderRadius.circular(5),
+                      color: isDarkActive
+                          ? const Color(0xFFF2F4F7)
+                          : const Color(0xFF98A2B3),
                     ),
                     child: Row(
                       children: [
                         const Icon(Icons.search),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.8,
-                          child: const TextField(
+                          child: TextField(
                             decoration: InputDecoration(
                               hintText: "Search Country",
-                              hintStyle: TextStyle(),
+                              hintStyle: const TextStyle(),
                               filled: true,
-                              fillColor: Color(0xFFF2F4F7),
+                              fillColor: isDarkActive
+                                  ? const Color(0xFFF2F4F7)
+                                  : const Color(0xFF98A2B3),
                               border: InputBorder.none,
                             ),
                           ),
@@ -109,24 +132,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
+                      InkWell(
+                        onTap: () =>
+                            choosenLanguage(context, size.height * 0.8),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
                             border: Border.all(
-                              color: const Color(0xFFA9B8D4),
+                              color: isDarkActive
+                                  ? const Color(0xFF000F24)
+                                  : const Color(0xFFA9B8D4),
                             ),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: InkWell(
-                          onTap: () =>
-                              choosenLanguage(context, size.height * 0.8),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                           child: Row(
-                            children: const [
-                              Icon(Icons.language_outlined),
-                              SizedBox(width: 5),
-                              Text("EN"),
+                            children: [
+                              Icon(
+                                Icons.language_outlined,
+                                color: isDarkActive
+                                    ? Colors.black
+                                    : const Color(0xFFD0D5DD),
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                "EN",
+                                style: TextStyle(
+                                  color: isDarkActive
+                                      ? Colors.black
+                                      : const Color(0xFFD0D5DD),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -141,14 +179,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                color: const Color(0xFFA9B8D4),
+                                color: isDarkActive
+                                    ? const Color(0xFF000F24)
+                                    : const Color(0xFFA9B8D4),
                               ),
                               borderRadius: BorderRadius.circular(5)),
                           child: Row(
-                            children: const [
-                              Icon(Icons.filter_list_alt),
-                              SizedBox(width: 5),
-                              Text("Filter"),
+                            children: [
+                              Icon(
+                                Icons.filter_list_alt,
+                                color: isDarkActive
+                                    ? const Color(0xFF000F24)
+                                    : const Color(0xFFA9B8D4),
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Filter",
+                                style: TextStyle(
+                                  color: isDarkActive
+                                      ? Colors.black
+                                      : const Color(0xFFD0D5DD),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -161,8 +213,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: (countriesList == null)
-            ? const Center(
-                child: CircularProgressIndicator(),
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: isDarkActive ? Colors.black : Colors.white,
+                ),
               )
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15)
@@ -171,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: countriesList!.length,
                   itemBuilder: (context, index) {
                     var countryList = countriesList![index];
+
                     return InkWell(
                       onTap: () {
                         Navigator.push(
@@ -189,60 +244,3 @@ class _HomeScreenState extends State<HomeScreen> {
               ));
   }
 }
-
-
-
-//  Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 15).copyWith(top: 15),
-//           child: ListView.builder(
-//             itemCount: countriesList!.length,
-//             itemBuilder: (context, index) {
-//               return Padding(
-//                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                   child: InkWell(
-                    // onTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => DetailsScreen(
-                    //         index: countriesList![index],
-                    //       ),
-                    //     ),
-                    //   );
-                    // },
-//                     child: Country(index: countriesList![index]),
-//                   ));
-//             },
-//           )),
-
-
-//  FutureBuilder(
-//           future: countryRespository.getCountry(),
-//           builder: ((context, AsyncSnapshot<List<CountryModel>> snapshot) {
-//             if (snapshot.hasData) {
-//               return ListView.builder(
-//                 itemCount: snapshot.data!.length,
-//                 itemBuilder: ((context, index) {
-//                   var snapshotName = snapshot.data![index];
-//                   return Padding(
-//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                     child: InkWell(
-//                       onTap: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                             builder: (context) => DetailsScreen(
-//                               index: snapshotName,
-//                             ),
-//                           ),
-//                         );
-//                       },
-//                       child: Country(index: snapshotName),
-//                     ),
-//                   );
-//                 }),
-//               );
-//             }
-//             return const Center(child: CircularProgressIndicator());
-//           }),
-//         ),

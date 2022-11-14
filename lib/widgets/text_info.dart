@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:explore/provider/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class TextInfo extends StatelessWidget {
   String? title;
@@ -16,12 +18,14 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkActive = context.read<DarkThemeProvider>().darkTheme;
     return RichText(
         text: TextSpan(children: [
       TextSpan(
         text: title,
-        style: const TextStyle(
-          color: Color(0xFF1C1917),
+        style: TextStyle(
+          color:
+              isDarkActive ? const Color(0xFF1C1917) : const Color(0xFFEAECF0),
           fontWeight: FontWeight.w500,
           fontSize: 16,
         ),

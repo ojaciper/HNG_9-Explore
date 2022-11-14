@@ -1,8 +1,10 @@
 import 'package:explore/models/countries_list.dart';
+import 'package:explore/provider/dark_theme_provider.dart';
 import 'package:explore/widgets/image_card.dart';
 import 'package:explore/widgets/text_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   DetailsScreen({super.key, required this.index});
@@ -12,15 +14,20 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formatter = NumberFormat('#,###,000');
+    bool isDarkActive = context.read<DarkThemeProvider>().darkTheme;
     return Scaffold(
-      backgroundColor: const Color(0xFFE5E5E5),
+      backgroundColor: isDarkActive ? Colors.white : const Color(0xFF000F24),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE5E5E5),
+        backgroundColor: isDarkActive ? Colors.white : const Color(0xFF000F24),
         elevation: 0,
         centerTitle: true,
         title: Text(
           index.name!.common!,
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: isDarkActive
+                ? const Color(0xFF1C1917)
+                : const Color(0xFFEAECF0),
+          ),
         ),
       ),
       body: Padding(

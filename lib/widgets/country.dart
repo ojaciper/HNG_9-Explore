@@ -1,5 +1,7 @@
 import 'package:explore/models/countries_list.dart';
+import 'package:explore/provider/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Country extends StatelessWidget {
   const Country({
@@ -10,6 +12,7 @@ class Country extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkActive = context.read<DarkThemeProvider>().darkTheme;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Column(
@@ -41,8 +44,10 @@ class Country extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     index.name!.common!,
-                    style: const TextStyle(
-                      color: Color(0xFF1C1917),
+                    style: TextStyle(
+                      color: isDarkActive
+                          ? const Color(0xFF1C1917)
+                          : const Color(0xFFF2F4F7),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -52,8 +57,10 @@ class Country extends StatelessWidget {
                     (index.capital!.isNotEmpty
                         ? index.capital![0]
                         : "No Capital"),
-                    style: const TextStyle(
-                      color: Color(0xFF667085),
+                    style: TextStyle(
+                      color: isDarkActive
+                          ? const Color(0xFF667085)
+                          : const Color(0xFF98A2B3),
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
